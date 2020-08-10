@@ -1,7 +1,7 @@
 export const recipes = [
 	{
 		name: 'Negroni',
-		ingredients: 'Campari, sweet vermouth, gin',
+		ingredients: ['Campari', 'sweet vermouth', 'gin'],
 		tags: ['sweet', 'bitter', 'boozy', 'classic'],
 		recipe: ['1 oz gin', '1 oz sweet vermouth', '1 oz Campari'],
 		directions: 'Stir with ice, strain into coupe glass.',
@@ -25,7 +25,7 @@ export const recipes = [
 	},
 	{
 		name: 'Martini (Vodka)',
-		ingredients: ['vodka, dry vermouth'],
+		ingredients: ['vodka', 'dry vermouth'],
 		tags: ['classic', 'boozy'],
 		recipe: ['2 oz vodka', '1 oz dry vermouth'],
 		directions: 'Add to ice-filled glass or shaker. Stir for 10 seconds. Strain into a coupe or cocktail glass.',
@@ -57,7 +57,7 @@ export const recipes = [
 	},
 	{
 		name: 'Sidecar',
-		ingredients: ['brandy', 'orange liqueur', 'Cointreau', 'lemon juice'],
+		ingredients: ['brandy', 'orange liqueur', 'Cointreau', 'lemon juice', 'lemon'],
 		tags: ['boozy', 'classic', 'acidic'],
 		recipe: ['2 oz brandy or cognac', '3/4 oz orange liqueur', '3/4 oz lemon juice'],
 		directions: 'Rim a coupe glass with sugar. Shake ingredients with ice and strain into glass.',
@@ -65,7 +65,7 @@ export const recipes = [
 	},
 	{
 		name: 'Gimlet',
-		ingredients: ['gin', 'vodka', 'lime juice'],
+		ingredients: ['gin', 'vodka', 'lime juice', 'lime'],
 		tags: ['classic', 'easy'],
 		recipe: ['2 oz gin or vodka', '2/3 oz lime juice'],
 		directions: 'Shake with ice, then strain into chilled cocktail glass.',
@@ -73,9 +73,9 @@ export const recipes = [
 	},
 	{
 		name: 'Margarita',
-		ingredients: ['tequila', 'lime juice', 'orange liqueur', 'triple sec'],
+		ingredients: ['tequila', 'lime juice', 'orange liqueur', 'Cointreau', 'triple sec'],
 		tags: ['classic', 'party'],
-		recipe: ['2 oz silver tequila', '1 oz Cointreau', '1 oz lime juice'],
+		recipe: ['2 oz silver tequila', '1 oz Cointreau or triple sec', '1 oz lime juice'],
 		directions: 'Rim a margarita class with lime wedge and salt. Shake ingredients with ice and strain into glass over ice.',
 		garnish: 'Lime wedge'
 	},
@@ -105,9 +105,9 @@ export const recipes = [
 	},
 	{
 		name: 'Sazerac',
-		ingredients: ['whiskey', 'simple syrup', 'peychaud bitters', 'absinthe'],
+		ingredients: ['whiskey', 'simple syrup', 'peychaud\'s bitters', 'absinthe'],
 		tags: ['boozy', 'classic'],
-		recipe: ['2 oz rye whiskey', '1/2 oz simple syrup', '2 dashes Paychaud bitters'],
+		recipe: ['2 oz rye whiskey', '1/2 oz simple syrup', '2 dashes Paychaud\'s bitters'],
 		directions: 'Rim a glass with absinthe. Stir ingredients into mixing glass, strain into cocktail glass.',
 		garnish: 'lemon peel'
 	},

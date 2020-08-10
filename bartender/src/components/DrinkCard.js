@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -25,6 +24,24 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  boozy: {
+    backgroundColor: '#b5efff'
+  },
+  classic: {
+    backgroundColor: '#b5c3ff'
+  },
+  easy: {
+    backgroundColor: '#fdffb5'
+  },
+  sweet: {
+    backgroundColor: '#ffc6b5'
+  },
+  bitter: {
+    backgroundColor: '#d5ffb5'
+  },
+  spicy: {
+    backgroundColor: '#ffb5b5'
   }
 }));
 
@@ -59,31 +76,31 @@ export const DrinkCard = (props) => {
           </Typography>
           <Typography>
             {tags.map((tag) =>
-              <Chip label={tag} />
+              <Chip className={classes[tag]} label={tag} />
             )}
           </Typography>
         </CardContent>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>How to make:</Typography>
+            {recipe.map((step, idx) => 
+              <Typography paragraph>
+                - {step}
+              </Typography>
+            )}
+            <Typography paragraph>
+              Garnish: {garnish}
+            </Typography>
+            <Typography paragraph>
+              {directions}
+            </Typography>
+          </CardContent>
+        </Collapse>
         <CardActions>
           <Button size="small" color="primary" onClick={handleExpandClick} aria-expanded={expanded}>
             View
           </Button>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>How to make:</Typography>
-          {recipe.map((step, idx) => 
-            <Typography paragraph>
-              - {step}
-            </Typography>
-          )}
-          <Typography paragraph>
-            Garnish: {garnish}
-          </Typography>
-          <Typography paragraph>
-            {directions}
-          </Typography>
-        </CardContent>
-      </Collapse>
       </Card>
     </React.Fragment>
   );
