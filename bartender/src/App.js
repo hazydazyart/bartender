@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -16,14 +17,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import {DrinkCard} from './components/DrinkCard';
 import {recipes} from './data/recipes';
+import {allIngredients} from './data/ingredients'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
+      {'© '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -42,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.5),
     marginTop: '10px',
   },
+  chip: {
+    marginLeft: '5px'
+  },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
@@ -57,34 +59,32 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  ingredientFilter: {
+    minWidth: '300px'
+  }
 }));
 
 export default function Album() {
   const classes = useStyles();
   const [ingredientFilters, setIngredientFilters] = useState([]);
   const [tagFilters, setTagFilters] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
   const [additionalFilter, setAdditionalFilter] = useState("include-any");
-
-  const ingredientRef = useRef(null);
-  const tagRef = useRef(null);
+  const [value, setValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');
 
   const updateAdditionalFilter = (e) => {
     setAdditionalFilter(e.target.value);
   }
 
-  const updateIngredients = () => {
-    const ingredients = [...ingredientFilters, ingredientRef.current.value];
+  const updateIngredients = (ingredient) => {
+    if (ingredient) {
+      const ingredients = [...ingredientFilters, ingredient];
 
-    ingredientRef.current.value = '';
-    setIngredientFilters(ingredients);
-  }
-
-  const updateTags = () => {
-    const tags = [...tagFilters, tagRef.current.value];
-
-    tagRef.current.value = '';
-    setTagFilters(tags);
+      setIngredientFilters(ingredients);
+      setValue('');
+      setInputValue('');
+    }
   }
 
   const handleIngredientDelete = (ingredient) => {
@@ -116,7 +116,6 @@ export default function Album() {
         toBeRemoved = false;
         recipe.ingredients.forEach((ingredient) => {
           if (!ingredientFilters.includes(ingredient)) {
-            console.log('it aint in here')
             toBeRemoved = true;
           }
         })
@@ -152,24 +151,28 @@ export default function Album() {
             <Grid item>
               <RadioGroup row aria-label="Additional filter options" name="other-filter" value={additionalFilter} onChange={updateAdditionalFilter}>
                 <FormControlLabel value="include-any" control={<Radio />} label="Include recipes with any of the following ingredients" />
-                <FormControlLabel value="include-only" control={<Radio />} label="Include recipes wtih only the following ingredients" />
+                <FormControlLabel value="include-only" control={<Radio />} label="Include recipes with only the following ingredients" />
               </RadioGroup>
             </Grid>
           </Grid>
           <Grid container spacing={2} justify="center">
               <Grid item>
-                <TextField
+                <Autocomplete
+                  disableClearable
+                  value={value}
+                  className={classes.ingredientFilter}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                    updateIngredients(newValue);
+                  }}
+                  inputValue={inputValue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                  }}
                   id="ingredient-filter"
-                  label="Ingredient"
-                  variant="outlined"
-                  inputRef={ingredientRef} />
-                  <Button
-                    className={classes.filterButton}
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => updateIngredients()}>
-                    Add
-                  </Button>
+                  options={allIngredients}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => <TextField {...params} label="Ingredient" variant="outlined" />} />
               </Grid>
           </Grid>
         </Container>
@@ -210,11 +213,11 @@ export default function Album() {
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
+        <Typography variant="h6" component="h3" align="center" gutterBottom>
+          Mix Me A Drink
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Are we missing your favorite recipe? Find a mistake? Email us! [email]
         </Typography>
         <Copyright />
       </footer>
