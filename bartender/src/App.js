@@ -95,6 +95,10 @@ export default function Album() {
     setIngredientFilters(ingredients);
   }
 
+  const getUniqueListBy = (arr, key) => {
+      return [...new Map(arr.map(item => [item[key], item])).values()]
+  }
+
   const filterRecipes = () => {
     const tempArray = [];
     let toBeRemoved;
@@ -111,7 +115,6 @@ export default function Album() {
       recipes.forEach((recipe) => {
         toBeRemoved = false;
         recipe.ingredients.forEach((ingredient) => {
-          console.log(ingredient)
           if (!ingredientFilters.includes(ingredient)) {
             console.log('it aint in here')
             toBeRemoved = true;
@@ -122,7 +125,7 @@ export default function Album() {
       });
     }
 
-    setFilteredRecipes(tempArray)
+    setFilteredRecipes(getUniqueListBy(tempArray, 'name'));
   }
 
   return (
