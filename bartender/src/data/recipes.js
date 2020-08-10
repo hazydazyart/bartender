@@ -201,7 +201,7 @@ export const recipes = [
 	},
 	{
 		name: 'Mai Tai',
-		ingredients: ['rum', 'lime juice', 'orgeat', 'orange curacao'],
+		ingredients: ['rum', 'lime juice', 'orgeat', 'orange curaçao'],
 		tags: ['boozy', 'fruity'],
 		recipe: ['1 1/2 oz white rum', '1/2 oz lime juice', '1/2 oz orange curacao', '1/2 oz orgeat', '3/4 oz dark rum'],
 		directions: 'Shake all ingredients besides dark rum in a mixer with ice. Strain into glass with ice and float dark rum on top.',
@@ -225,7 +225,7 @@ export const recipes = [
 	},
 	{
 		name: 'Blue Hawaii',
-		ingredients: ['vodka', 'rum', 'blue curacao', 'pineapple juice', 'sweet-and-sour mix'],
+		ingredients: ['vodka', 'rum', 'blue curaçao', 'pineapple juice', 'sweet-and-sour mix'],
 		tags: ['fruity', 'boozy'],
 		recipe: ['3/4 oz vodka', '3/4 oz light rum', '1/2 oz blue curacao', '3 oz pineapple juice', '1 oz sweet-and-sour mix'],
 		directions: 'Add ingredients to shaker with ice and shake until chilled. Strain into glass over ice.',
@@ -241,7 +241,7 @@ export const recipes = [
 	},
 	{
 		name: 'Zombie',
-		ingredients: ['rum', 'orange curacao', 'lemon juice', 'lime juice', 'orange juice', 'passionfruit juice', 'grenadine', 'Angostura bitters'],
+		ingredients: ['rum', 'orange curaçao', 'lemon juice', 'lime juice', 'orange juice', 'passionfruit juice', 'grenadine', 'Angostura bitters'],
 		tags: ['fruity'],
 		recipe: ['1 oz light rum' , '1 oz dark rum', '1 oz orange curacao', '1/2 oz lemon juice', '1/2 oz lime juice', '1 1/2 oz orange juice', '1 1/2 oz passionfruit juice', '1/4 oz grenadine', '2 dashes Angostura bitters'],
 		directions: 'Add ingredients to shaker with ice and shake until chilled. Strain into glass over ice.',
@@ -249,7 +249,7 @@ export const recipes = [
 	},
 	{
 		name: 'Cable Car',
-		ingredients: ['rum', 'orange curacao', 'lemon juice', 'cinnamon', 'sugar'],
+		ingredients: ['rum', 'orange curaçao', 'lemon juice', 'cinnamon', 'sugar'],
 		tags: ['citrusy'],
 		recipe: ['1 1/2 oz rum', '3/4 oz orange curacao', '1 oz lemon juice', '1/2 tsp cinnamon', '1/2 cup sugar'],
 		directions: 'Combine cinnamon and sugar in bowl. Rim glass with cinnamon sugar mixture. Add liquid ingredients to shaker with ice and shake until chilled, then strain into glass.',

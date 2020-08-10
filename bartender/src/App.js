@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -16,8 +16,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import {DrinkCard} from './components/DrinkCard';
+import {ShoppingList} from './components/ShoppingList';
 import {recipes} from './data/recipes';
-import {allIngredients} from './data/ingredients'
+import {allIngredients} from './data/ingredients';
+import {StoreContext} from './modules/store';
 
 function Copyright() {
   return (
@@ -64,35 +66,46 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Album() {
+export default function Album(props) {
   const classes = useStyles();
-  const [ingredientFilters, setIngredientFilters] = useState([]);
   const [tagFilters, setTagFilters] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState(recipes);
-  const [additionalFilter, setAdditionalFilter] = useState("include-any");
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
+  const [shoppingList, addToShoppingList] = React.useState([]);
+
+  const [state, dispatch] = useContext(StoreContext);
+
+  console.log(state)
+
+  const {
+    ingredientFilters,
+    additionalFilter
+  } = state;
 
   const updateAdditionalFilter = (e) => {
-    setAdditionalFilter(e.target.value);
+    dispatch({
+      type: 'ACTIONS/SET_INCLUDE',
+      additionalFilter: e.target.value
+    })
   }
 
   const updateIngredients = (ingredient) => {
     if (ingredient) {
-      const ingredients = [...ingredientFilters, ingredient];
-
-      setIngredientFilters(ingredients);
+      dispatch({
+        type: 'ACTIONS/ADD_FILTER',
+        ingredient
+      })
       setValue('');
       setInputValue('');
     }
   }
 
   const handleIngredientDelete = (ingredient) => {
-    const ingredients = ingredientFilters.filter((name) => {
-        return name !== ingredient
-    });
-
-    setIngredientFilters(ingredients);
+    dispatch({
+      type: 'ACTIONS/DELETE_FILTER',
+      ingredient
+    })
   }
 
   const getUniqueListBy = (arr, key) => {
@@ -125,6 +138,10 @@ export default function Album() {
     }
 
     setFilteredRecipes(getUniqueListBy(tempArray, 'name'));
+  }
+
+  const updateShoppingList = (ingredient) => {
+    return [...shoppingList, ingredient];
   }
 
   return (
