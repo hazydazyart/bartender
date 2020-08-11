@@ -1,15 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import {DrinkCard} from './components/DrinkCard';
 import {ShoppingList} from './components/ShoppingList';
+import {FilterSettings} from './components/FilterSettings';
 import {recipes} from './data/recipes';
 import {allIngredients} from './data/ingredients';
 import {StoreContext} from './modules/store';
@@ -60,46 +57,21 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
-  },
-  ingredientFilter: {
-    minWidth: '300px'
   }
 }));
 
 export default function Album(props) {
   const classes = useStyles();
-  const [tagFilters, setTagFilters] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
-  const [value, setValue] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
-  const [shoppingList, addToShoppingList] = React.useState([]);
 
   const [state, dispatch] = useContext(StoreContext);
 
   console.log(state)
 
   const {
+    filteredRecipes,
     ingredientFilters,
     additionalFilter
   } = state;
-
-  const updateAdditionalFilter = (e) => {
-    dispatch({
-      type: 'ACTIONS/SET_INCLUDE',
-      additionalFilter: e.target.value
-    })
-  }
-
-  const updateIngredients = (ingredient) => {
-    if (ingredient) {
-      dispatch({
-        type: 'ACTIONS/ADD_FILTER',
-        ingredient
-      })
-      setValue('');
-      setInputValue('');
-    }
-  }
 
   const handleIngredientDelete = (ingredient) => {
     dispatch({
@@ -108,40 +80,10 @@ export default function Album(props) {
     })
   }
 
-  const getUniqueListBy = (arr, key) => {
-      return [...new Map(arr.map(item => [item[key], item])).values()]
-  }
-
   const filterRecipes = () => {
-    const tempArray = [];
-    let toBeRemoved;
-
-    if (additionalFilter === "include-any") {
-      recipes.forEach((recipe) => {
-        recipe.ingredients.forEach((ingredient) => {
-          if (ingredientFilters.includes(ingredient)) {
-            tempArray.push(recipe)
-          }
-        })
-      });
-    } else {
-      recipes.forEach((recipe) => {
-        toBeRemoved = false;
-        recipe.ingredients.forEach((ingredient) => {
-          if (!ingredientFilters.includes(ingredient)) {
-            toBeRemoved = true;
-          }
-        })
-
-        !toBeRemoved && tempArray.push(recipe);
-      });
-    }
-
-    setFilteredRecipes(getUniqueListBy(tempArray, 'name'));
-  }
-
-  const updateShoppingList = (ingredient) => {
-    return [...shoppingList, ingredient];
+    dispatch({
+      type: 'ACTIONS/DO_SEARCH'
+    })
   }
 
   return (
@@ -164,34 +106,7 @@ export default function Album(props) {
           <Typography variant="h5" component="h3" align="center" color="textSecondary" paragraph>
             Add ingredients to filter recipes
           </Typography>
-          <Grid container spacing={2} justify="center">
-            <Grid item>
-              <RadioGroup row aria-label="Additional filter options" name="other-filter" value={additionalFilter} onChange={updateAdditionalFilter}>
-                <FormControlLabel value="include-any" control={<Radio />} label="Include recipes with any of the following ingredients" />
-                <FormControlLabel value="include-only" control={<Radio />} label="Include recipes with only the following ingredients" />
-              </RadioGroup>
-            </Grid>
-          </Grid>
-          <Grid container spacing={2} justify="center">
-              <Grid item>
-                <Autocomplete
-                  disableClearable
-                  value={value}
-                  className={classes.ingredientFilter}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                    updateIngredients(newValue);
-                  }}
-                  inputValue={inputValue}
-                  onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                  }}
-                  id="ingredient-filter"
-                  options={allIngredients}
-                  getOptionLabel={(option) => option}
-                  renderInput={(params) => <TextField {...params} label="Ingredient" variant="outlined" />} />
-              </Grid>
-          </Grid>
+          <FilterSettings />
         </Container>
         {ingredientFilters && ingredientFilters.length ?
           <React.Fragment>

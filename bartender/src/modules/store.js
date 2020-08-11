@@ -24,7 +24,7 @@ const reducer = (state, action) => {
 		case DELETE_FILTER:
 			return deleteItemFromFilter(state, action);
 		case DO_SEARCH:
-			return state;
+			return filterRecipes(state);
 		case SET_INCLUDE:
 			return updateAdditionalFilter(state, action);
 		case ADD_SHOPPING:
@@ -66,8 +66,43 @@ const updateAdditionalFilter = (state, action) => {
 	}
 }
 
-const filterRecipes = (state, action) => {
-	const {additionalFilter} = state;
+const filterRecipes = (state) => {
+	const {
+		additionalFilter,
+		ingredientFilters
+	} = state;
+    const tempArray = [];
+    let toBeRemoved;
+
+    if (additionalFilter === "include-any") {
+      recipes.forEach((recipe) => {
+        recipe.ingredients.forEach((ingredient) => {
+          if (ingredientFilters.includes(ingredient)) {
+            tempArray.push(recipe)
+          }
+        })
+      });
+    } else {
+      recipes.forEach((recipe) => {
+        toBeRemoved = false;
+        recipe.ingredients.forEach((ingredient) => {
+          if (!ingredientFilters.includes(ingredient)) {
+            toBeRemoved = true;
+          }
+        })
+
+        !toBeRemoved && tempArray.push(recipe);
+      });
+    }
+
+    return {
+    	...state,
+    	filteredRecipes: getUniqueListBy(tempArray, 'name')
+    }
+}
+
+const getUniqueListBy = (arr, key) => {
+  return [...new Map(arr.map(item => [item[key], item])).values()]
 }
 
 export const StoreProvider = (props) => {
