@@ -15,7 +15,6 @@ import {DrinkCard} from './components/DrinkCard';
 import {ShoppingList} from './components/ShoppingList';
 import {FilterSettings} from './components/FilterSettings';
 import {recipes} from './data/recipes';
-import {allIngredients} from './data/ingredients';
 import {StoreContext} from './modules/store';
 
 function Copyright() {

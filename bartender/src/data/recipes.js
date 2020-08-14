@@ -81,7 +81,7 @@ export const recipes = [
 	},
 	{
 		name: 'Old Fashioned',
-		ingredients: ['bourbon', 'whiskey', 'Angostura bitters', 'sugar'],
+		ingredients: ['whiskey', 'Angostura bitters', 'sugar'],
 		tags: ['boozy', 'classic'],
 		recipe: ['2 oz bourbon or rye whiskey', '2 dashes Angostura bitters', '1 sugar cube or 1 tsp sugar'],
 		directions: 'Put sugar in glass. Add bitters, then add whiskey and stir until sugar dissolves. Add ice, stir again, and serve.',
@@ -254,5 +254,101 @@ export const recipes = [
 		recipe: ['1 1/2 oz rum', '3/4 oz orange curacao', '1 oz lemon juice', '1/2 tsp cinnamon', '1/2 cup sugar'],
 		directions: 'Combine cinnamon and sugar in bowl. Rim glass with cinnamon sugar mixture. Add liquid ingredients to shaker with ice and shake until chilled, then strain into glass.',
 		garnish: 'orange spiral'
+	},
+	{
+		name: 'Black Russian',
+		ingredients: ['vodka', 'coffee liqueur'],
+		tags: ['boozy'],
+		recipe: ['1 1/2 oz vodka', '3/4 oz coffee liqueur'],
+		directions: 'Add ingredients to old fashioned cup over ice and stir well.',
+		garnish: 'maraschino cherry'
+	},
+	{
+		name: 'White Russian',
+		ingredients: ['vodka', 'coffee liqueur', 'cream'],
+		tags: ['sweet'],
+		recipe: ['1 1/2 oz vodka', '3/4 oz coffee liqueur', '3/4 oz cream'],
+		directions: 'Add ingredients to old fashioned cup over ice and stir well.',
+		garnish: 'maraschino cherry'
+	},
+	{
+		name: 'Cape Codder',
+		ingredients: ['vodka', 'cranberry juice'],
+		tags: ['sour'],
+		recipe: ['2 oz vodka', '3 oz cranberry juice'],
+		directions: 'Add ingredients to glass with ice and stir well. Squeeze in lime wedge or add lime juice to taste.',
+		garnish: 'lime wedge'
+	},
+	{
+		name: 'Lemon Drop',
+		ingredients: ['vodka', 'lemon juice', 'simple syrup'],
+		tags: ['sour'],
+		recipe: ['1 1/2 oz vodka', '3/4 oz lemon juice', '1/2 oz simple syrup'],
+		directions: 'Rim a cocktail glass in white sugar. Add ingredients to shaker with ice. Shake until chilled, then strain into cocktail glass.',
+		garnish: 'lemon twist'
+	},
+	{
+		name: 'Chocolate Martini',
+		ingredients: ['vodka', 'creme de cacao'],
+		tags: ['rich'],
+		recipe: ['2 oz vodka', '1 1/2 oz creme de cacao'],
+		directions: 'Rim cocktail glass with cocoa powder. Add ingredients to shaker with ice. Shake until chilled, then strain into glass.',
+		garnish: 'chocolate candy'
+	},
+	{
+		name: 'Sex on the Beach',
+		ingredients: ['vodka', 'peach schnapps', 'creme de cassis', 'orange juice', 'cranberry juice'],
+		tags: ['fruity'],
+		recipe: ['1 1/2 oz vodka', '3/4 oz peach schnapps', '1/2 oz creme de cassis', '2 oz orange juice', '2 oz cranberry juice'],
+		directions: 'Add ingredients to shaker with ice and shake until chilled. Strain into glass over ice.',
+		garnish: 'maraschino cherry'
+	},
+	{
+		name: 'Hairy Navel',
+		ingredients: ['vodka', 'peach schnapps', 'orange juice'],
+		tags: ['fruity'],
+		recipe: ['1 oz vodka', '1 oz peach schnapps', '8 oz orange juice'],
+		directions: 'Pour vodka and schnapps into glass over ice, then fill with orange juice.',
+		garnish: 'orange slice'
+	},
+	{
+		name: 'Pearl Harbor',
+		ingredients: ['vodka', 'midori', 'pineapple juice'],
+		tags: ['fruity'],
+		recipe: ['2 oz vodka', '1 oz Midori', '4 oz pineapple juice'],
+		directions: 'Add vodka and Midori to glass over ice and fill with pineapple juice.',
+		garnish: 'maraschino cherry, pineapple wedge'
+	},
+	{
+		name: 'Kamikaze',
+		ingredients: ['vodka', 'lime juice', 'triple sec'],
+		tags: ['refreshing', 'sour'],
+		recipe: ['1 1/2 oz vodka', '1 oz lime juice', '1 oz triple sec'],
+		directions: 'Add ingredients to shaker with ice and shake until chilled. Strain into glass.',
+		garnish: 'lime wedge'
+	},
+	{
+		name: 'Godmother',
+		ingredients: ['vodka', 'amaretto'],
+		tags: ['sipping'],
+		recipe: ['1 1/2 oz vodka', '1/2 amaretto'],
+		directions: 'Add ingredients to glass over ice and stir.',
+		garnish: ''
+	},
+	{
+		name: 'Campari cocktail',
+		ingredients: ['campari', 'vodka', 'Angostura bitters'],
+		tags: ['bitter', 'sipping'],
+		recipe: ['1 oz Campari', '3/4 oz vodka', '1 dash Angostura bitters'],
+		directions: 'Add ingredients to glass over ice and stir.',
+		garnish: 'lenon twist'
+	},
+	{
+		name: 'Zipper',
+		ingredients: ['vodka', 'chambord', 'sprite'],
+		tags: ['refreshing'],
+		recipe: ['1 oz vodka', '1 oz chambord', '1 oz sprite'],
+		directions: 'Add ingredients to glass over ice and stir.',
+		garnish: 'berries, mint'
 	}
 ];

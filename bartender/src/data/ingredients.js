@@ -46,5 +46,13 @@ export const allIngredients = [
 	'brown sugar',
 	'grenadine',
 	'cinnamon',
-	'sugar'
+	'sugar',
+	'cream',
+	'creme de cacao',
+	'peach schnapps',
+	'creme de cassis',
+	'midori',
+	'amaretto',
+	'chambord',
+	'sprite'
 ];

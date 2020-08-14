@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
-import Collapse from '@material-ui/core/Collapse';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {StoreContext} from '../modules/store';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -19,10 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const ShoppingList = (props) => {
   const classes = useStyles();
+  const [state, dispatch] = useContext(StoreContext);
 
   const {
-    list
-  } = props;
+    shoppingList
+  } = state;
 
   return (
     <React.Fragment>
@@ -34,7 +35,7 @@ export const ShoppingList = (props) => {
           </Typography>
           <Typography>
             <ul>
-              {list.map((item) =>
+              {shoppingList.map((item) =>
                 <li>{item}</li>
               )}
             </ul>
