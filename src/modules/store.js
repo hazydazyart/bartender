@@ -5,7 +5,8 @@ import {
 	DO_SEARCH,
 	ADD_SHOPPING,
 	SET_INCLUDE,
-	LOADING
+	LOADING,
+	CLEAR_FILTER
 } from './constants';
 import {recipes} from '../data/recipes';
 
@@ -33,8 +34,17 @@ const reducer = (state, action) => {
 			return addItemToShopping(state, action);
 		case LOADING:
 			return setLoading(state);
+		case CLEAR_FILTER:
+			return clearFilter(state);
 		default:
 			return state;
+	}
+}
+
+const clearFilter = (state) => {
+	return {
+		...state,
+		ingredientFilters: []
 	}
 }
 

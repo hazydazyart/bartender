@@ -1,13 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Chip from '@material-ui/core/Chip';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {StoreContext} from '../modules/store';
 import {allIngredients} from '../data/ingredients';
@@ -48,6 +46,7 @@ export const FilterSettings = () => {
 
 	return (
 		<React.Fragment>
+      <CssBaseline />
       <Grid container spacing={2} justify="center">
         <Grid item>
           <RadioGroup row aria-label="Additional filter options" name="other-filter" value={additionalFilter} onChange={updateAdditionalFilter}>

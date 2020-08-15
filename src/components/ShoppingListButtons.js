@@ -15,17 +15,25 @@ export const ShoppingListButtons = ({ingredients}) => {
 
   const {
     ingredientFilters,
+    name,
     shoppingList
   } = state;
+
+  const listId = name + '-shopping-list'
+
+  const ingredientsForShoppingList = ingredients.filter(ingredient => !ingredientFilters.includes(ingredient) && !shoppingList.includes(ingredient));
 
   const handleAddToListClick = (ingredient) => {
     dispatch({
       type: 'ACTIONS/ADD_TO_SHOPPING_LIST',
       ingredient
-    })
+    });
+
+    if (ingredientsForShoppingList.length > 0) {
+      document.querySelectorAll(`#${listId} button`)[0].focus();
+    }
   }
 
-  const ingredientsForShoppingList = ingredients.filter(ingredient => !ingredientFilters.includes(ingredient) && !shoppingList.includes(ingredient));
 
   if (ingredientsForShoppingList.length < 1) {
     return null;
@@ -36,12 +44,14 @@ export const ShoppingListButtons = ({ingredients}) => {
       <div>
         Add the missing ingredients to your shopping list:
       </div>
-      <ul>
-        {ingredientsForShoppingList.map((item) => (
+      <ul id={listId}>
+        {ingredientsForShoppingList.map((item, idx) => (
           <li>
             <Button
+              aria-label={`Add ${item} to shopping list`}
               color="primary"
               className={classes.buttonText}
+              key={'shoppingbutton' + idx}
               onClick={() => handleAddToListClick(item)}>{item}</Button>
           </li>
         ))}

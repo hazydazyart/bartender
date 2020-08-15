@@ -44,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
   },
   spicy: {
     backgroundColor: '#ffb5b5'
+  },
+  focusAnchor: {
+    position: 'absolute',
+    left: '-5000px'
   }
 }));
 
@@ -51,16 +55,11 @@ export const DrinkCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const [state, dispatch] = useContext(StoreContext);
+  const state = useContext(StoreContext)[0];
 
   const {
-    additionalFilter,
-    ingredientFilters
+    additionalFilter
   } = state;
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const {
     name,
@@ -70,6 +69,12 @@ export const DrinkCard = (props) => {
     garnish,
     ingredients
   } = props;
+
+  const handleExpandClick = () => {
+    const topOfCard = document.querySelector(`#${name}-top`);
+    topOfCard && topOfCard.focus();
+    setExpanded(!expanded);
+  };
 
   return (
     <React.Fragment>
@@ -81,6 +86,7 @@ export const DrinkCard = (props) => {
           title="Image title"
         />
         <CardContent className={classes.cardContent}>
+          <span tabIndex={expanded ? '0' : '-1'} className={classes.focusAnchor} id={`${name}-top`}>{name} recipe</span>
           <Typography gutterBottom variant="h5" component="h3">
             {name}
           </Typography>
@@ -104,12 +110,12 @@ export const DrinkCard = (props) => {
             <Typography paragraph>
               {directions}
             </Typography>
-            {additionalFilter === "include-any" && <ShoppingListButtons ingredients={ingredients} />}
+            {additionalFilter === "include-any" && <ShoppingListButtons for={name} ingredients={ingredients} />}
           </CardContent>
         </Collapse>
         <CardActions>
-          <Button size="small" color="primary" onClick={handleExpandClick} aria-expanded={expanded}>
-            View
+          <Button aria-label={expanded ? 'Show recipe' : 'Hide recipe'} color="primary" onClick={handleExpandClick} aria-expanded={expanded}>
+            {expanded ? 'Hide' : 'View'}
           </Button>
         </CardActions>
       </Card>

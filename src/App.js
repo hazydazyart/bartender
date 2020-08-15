@@ -84,6 +84,12 @@ export default function App(props) {
       }, 500)
   }
 
+  const clearFilter = () => {
+    dispatch({
+      type: 'ACTIONS/CLEAR_FILTER'
+    })
+  }
+
   const noResultsSubtitle = ingredientFilters.length ? "No results found - adjust your filter options and try again." : "Add ingredients to your filter and click 'Mix Me A Drink!' to get your results!"
 
   return (
@@ -128,6 +134,9 @@ export default function App(props) {
             <Grid container spacing={2} justify="center">
               <Grid item>
                 <Button onClick={() => filterRecipes()} variant="contained" color="primary">Mix Me A Drink!</Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={() => clearFilter()} variant="contained" color="primary">Clear filter</Button>
               </Grid>
             </Grid>
           </React.Fragment>
