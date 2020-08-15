@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
 export const FilterSettings = () => {
 	const classes = useStyles();
 	const [state, dispatch] = useContext(StoreContext);
-  const [value, setValue] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
+  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const {
   	additionalFilter

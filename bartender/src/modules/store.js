@@ -4,7 +4,8 @@ import {
 	DELETE_FILTER,
 	DO_SEARCH,
 	ADD_SHOPPING,
-	SET_INCLUDE
+	SET_INCLUDE,
+	LOADING
 } from './constants';
 import {recipes} from '../data/recipes';
 
@@ -14,7 +15,8 @@ const initialState = {
 	filteredRecipes: [],
 	ingredientFilters: [],
 	shoppingList: [],
-	additionalFilter: 'include-any'
+	additionalFilter: 'include-any',
+	loading: false
 };
 
 const reducer = (state, action) => {
@@ -29,8 +31,18 @@ const reducer = (state, action) => {
 			return updateAdditionalFilter(state, action);
 		case ADD_SHOPPING:
 			return addItemToShopping(state, action);
+		case LOADING:
+			return setLoading(state);
 		default:
 			return state;
+	}
+}
+
+const setLoading = (state) => {
+	return {
+		...state,
+		filteredRecipes: [],
+		loading: true
 	}
 }
 
@@ -97,6 +109,7 @@ const filterRecipes = (state) => {
 
     return {
     	...state,
+    	loading: false,
     	filteredRecipes: getUniqueListBy(tempArray, 'name')
     }
 }

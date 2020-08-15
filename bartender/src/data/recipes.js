@@ -65,7 +65,7 @@ export const recipes = [
 	},
 	{
 		name: 'Gimlet',
-		ingredients: ['gin', 'vodka', 'lime juice', 'lime'],
+		ingredients: ['gin', 'vodka', 'lime juice'],
 		tags: ['classic', 'easy'],
 		recipe: ['2 oz gin or vodka', '2/3 oz lime juice'],
 		directions: 'Shake with ice, then strain into chilled cocktail glass.',

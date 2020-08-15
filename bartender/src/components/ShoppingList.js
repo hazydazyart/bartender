@@ -10,10 +10,11 @@ import {StoreContext} from '../modules/store';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    position: 'absolute',
+    position: '-webkit-sticky',
     zIndex: 100,
-    top: 0,
-    left: 0
+    bottom: '1rem',
+    position: 'sticky',
+    width: '400px'
   }
 }));
 
@@ -24,6 +25,10 @@ export const ShoppingList = (props) => {
   const {
     shoppingList
   } = state;
+
+  if (!shoppingList.length) {
+    return null;
+  }
 
   return (
     <React.Fragment>

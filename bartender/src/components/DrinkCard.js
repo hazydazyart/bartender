@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, {useContext} from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -63,13 +62,6 @@ export const DrinkCard = (props) => {
     setExpanded(!expanded);
   };
 
-  const handleAddToListClick = (ingredient) => {
-    dispatch({
-      type: 'ACTIONS/ADD_TO_SHOPPING_LIST',
-      ingredient
-    })
-  }
-
   const {
     name,
     recipe,
@@ -78,12 +70,6 @@ export const DrinkCard = (props) => {
     garnish,
     ingredients
   } = props;
-
-  const ingredientsForShoppingList = ingredients.filter(ingredient => !ingredientFilters.includes(ingredient));
-
-  console.log(ingredientFilters, ingredients)
-
-  console.log(ingredientsForShoppingList)
 
   return (
     <React.Fragment>
@@ -118,16 +104,7 @@ export const DrinkCard = (props) => {
             <Typography paragraph>
               {directions}
             </Typography>
-            {additionalFilter === "include-any" &&
-              <>
-                <Typography paragraph>
-                  Add the missing ingredients to your shopping list:
-                </Typography>
-                <div>
-                  <ShoppingListButtons ingredients={ingredientsForShoppingList} />
-                </div>
-              </>
-            }
+            {additionalFilter === "include-any" && <ShoppingListButtons ingredients={ingredients} />}
           </CardContent>
         </Collapse>
         <CardActions>

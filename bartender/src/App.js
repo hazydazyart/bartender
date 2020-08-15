@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -6,26 +6,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
 import {DrinkCard} from './components/DrinkCard';
 import {ShoppingList} from './components/ShoppingList';
 import {FilterSettings} from './components/FilterSettings';
-import {recipes} from './data/recipes';
 import {StoreContext} from './modules/store';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'© '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   filterButton: {
@@ -56,20 +45,24 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
+  },
+  container: {
+    alignItems: 'flex-start'
+  },
+  github: {
+    marginLeft: '10px'
   }
 }));
 
-export default function Album(props) {
+export default function App(props) {
   const classes = useStyles();
 
   const [state, dispatch] = useContext(StoreContext);
 
-  console.log(state)
-
   const {
     filteredRecipes,
     ingredientFilters,
-    additionalFilter
+    loading
   } = state;
 
   const handleIngredientDelete = (ingredient) => {
@@ -80,19 +73,28 @@ export default function Album(props) {
   }
 
   const filterRecipes = () => {
-    dispatch({
-      type: 'ACTIONS/DO_SEARCH'
-    })
+      dispatch({
+        type: 'ACTIONS/LOADING'
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: 'ACTIONS/DO_SEARCH'
+        });
+      }, 500)
   }
 
+  const noResultsSubtitle = ingredientFilters.length ? "No results found - adjust your filter options and try again." : "Add ingredients to your filter and click \'Mix Me A Drink!\' to get your results!"
+
   return (
-    <div>
+    <div className={classes.container}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" component="h1" color="inherit" noWrap>
             Mix Me A Drink
           </Typography>
+          <a className={classes.github} target="_blank" href="https://github.com/megaconle/bartender" color="secondary"><GitHubIcon aria-label="Go to Github repository" /></a>
         </Toolbar>
       </AppBar>
       <main>
@@ -132,7 +134,17 @@ export default function Album(props) {
         : null}
         </div>
         <Container className={classes.cardGrid} maxWidth="lg">
-          {/* End hero unit */}
+          {loading && <LinearProgress />}
+          {!loading && !filteredRecipes.length &&
+            <div aria-live='polite'>
+              <Typography variant="h6" component="h3" align="center" gutterBottom>
+                No Results :(
+              </Typography>
+              <Typography variant="body2" color="textSecondary" align="center">
+                {noResultsSubtitle}
+              </Typography>
+            </div>
+          }
           <Grid container spacing={4}>
             {filteredRecipes.map((recipe, idx) => (
               <Grid item key={idx} xs={12} sm={8} md={4}>
@@ -142,17 +154,7 @@ export default function Album(props) {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" component="h3" align="center" gutterBottom>
-          Mix Me A Drink
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Are we missing your favorite recipe? Find a mistake? Email us! [email]
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
+      <ShoppingList />
     </div>
   );
 }

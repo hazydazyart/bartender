@@ -13,6 +13,11 @@ export const ShoppingListButtons = ({ingredients}) => {
   const classes = useStyles();
   const [state, dispatch] = useContext(StoreContext);
 
+  const {
+    ingredientFilters,
+    shoppingList
+  } = state;
+
   const handleAddToListClick = (ingredient) => {
     dispatch({
       type: 'ACTIONS/ADD_TO_SHOPPING_LIST',
@@ -20,17 +25,28 @@ export const ShoppingListButtons = ({ingredients}) => {
     })
   }
 
+  const ingredientsForShoppingList = ingredients.filter(ingredient => !ingredientFilters.includes(ingredient) && !shoppingList.includes(ingredient));
+
+  if (ingredientsForShoppingList.length < 1) {
+    return null;
+  }
+
   return (
-    <ul>
-      {ingredients.map((item) => (
-        <li>
-          <Button
-            color="primary"
-            className={classes.buttonText}
-            onClick={() => handleAddToListClick(item)}>{item}</Button>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div>
+        Add the missing ingredients to your shopping list:
+      </div>
+      <ul>
+        {ingredientsForShoppingList.map((item) => (
+          <li>
+            <Button
+              color="primary"
+              className={classes.buttonText}
+              onClick={() => handleAddToListClick(item)}>{item}</Button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
