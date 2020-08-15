@@ -84,7 +84,7 @@ export default function App(props) {
       }, 500)
   }
 
-  const noResultsSubtitle = ingredientFilters.length ? "No results found - adjust your filter options and try again." : "Add ingredients to your filter and click \'Mix Me A Drink!\' to get your results!"
+  const noResultsSubtitle = ingredientFilters.length ? "No results found - adjust your filter options and try again." : "Add ingredients to your filter and click 'Mix Me A Drink!' to get your results!"
 
   return (
     <div className={classes.container}>
@@ -94,7 +94,7 @@ export default function App(props) {
           <Typography variant="h6" component="h1" color="inherit" noWrap>
             Mix Me A Drink
           </Typography>
-          <a className={classes.github} target="_blank" href="https://github.com/megaconle/bartender" color="secondary"><GitHubIcon aria-label="Go to Github repository" /></a>
+          <a className={classes.github} target="_blank" rel="noopener noreferrer" href="https://github.com/megaconle/bartender" color="secondary"><GitHubIcon aria-label="Go to Github repository" /></a>
         </Toolbar>
       </AppBar>
       <main>

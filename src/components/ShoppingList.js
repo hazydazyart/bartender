@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     bottom: '1rem',
     position: 'sticky',
-    width: '400px'
+    width: '300px'
   }
 }));
 
